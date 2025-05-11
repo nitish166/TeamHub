@@ -5,6 +5,7 @@ import Signup from '../pages/Signup';
 import Dashboard from '../pages/Dashboard';
 import PrivateRoute from '../components/PrivateRoute';
 import TeamManagement from '../pages/TeamManagement';
+import ProjectManagement from '../pages/ProjectManagement';
 
 const HomeRoutes: RouteObject[] = [
   {
@@ -32,6 +33,14 @@ const HomeRoutes: RouteObject[] = [
     element: (
       <PrivateRoute>
         <TeamManagement />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: '/project-management',
+    element: (
+      <PrivateRoute>
+        <ProjectManagement />
       </PrivateRoute>
     ),
   },
