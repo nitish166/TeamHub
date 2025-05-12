@@ -8,6 +8,13 @@ router.use(authMiddleware);
 
 /**
  * @swagger
+ * tags:
+ *   name: Team Management
+ *   description: Endpoints for managing teams
+ */
+
+/**
+ * @swagger
  * /team/create:
  *   post:
  *     summary: Create a new team
@@ -42,6 +49,85 @@ router.use(authMiddleware);
  *                     name:
  *                       type: string
  *                       example: Team Alpha
+ */
+
+/**
+ * @swagger
+ * /team/invite:
+ *   post:
+ *     summary: Invite a user to a team
+ *     tags: [Team Management]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               teamId:
+ *                 type: string
+ *                 example: team-id
+ *               email:
+ *                 type: string
+ *                 example: user@example.com
+ *     responses:
+ *       200:
+ *         description: User invited successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: User with email user@example.com invited to the team.
+ *       400:
+ *         description: Bad request
+ */
+
+/**
+ * @swagger
+ * /team/{teamId}/members:
+ *   get:
+ *     summary: List all members of a team
+ *     tags: [Team Management]
+ *     parameters:
+ *       - in: path
+ *         name: teamId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the team
+ *     responses:
+ *       200:
+ *         description: List of team members
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 members:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: string
+ *                         example: user-id
+ *                       name:
+ *                         type: string
+ *                         example: John Doe
+ *                       email:
+ *                         type: string
+ *                         example: john@example.com
+ *       400:
+ *         description: Bad request
  */
 
 // Create a new team

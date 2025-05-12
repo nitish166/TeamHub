@@ -24,13 +24,13 @@ const authController = require('../controllers/auth.controller');
  *             properties:
  *               name:
  *                 type: string
- *                 example: John Doe
+ *                 example: Nitish Kumar
  *               email:
  *                 type: string
- *                 example: johndoe@example.com
+ *                 example: knitish123@gmail.com
  *               password:
  *                 type: string
- *                 example: password123
+ *                 example: nitish123
  *     responses:
  *       201:
  *         description: User registered successfully
@@ -65,10 +65,10 @@ router.post('/signup', authController.signup);
  *             properties:
  *               email:
  *                 type: string
- *                 example: johndoe@example.com
+ *                 example: knitish123@gmail.com
  *               password:
  *                 type: string
- *                 example: password123
+ *                 example: nitish123
  *     responses:
  *       200:
  *         description: User logged in successfully

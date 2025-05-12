@@ -448,3 +448,39 @@ model Task {
   project      Project  @relation(fields: [projectId], references: [id])
   dueDate      DateTime
 }
+`````
+
+---
+
+## Swagger API Documentation
+
+TeamHub's backend includes **Swagger API documentation** to provide a detailed overview of all available endpoints. Swagger makes it easy to test and understand the API.
+
+### Features of Swagger Documentation:
+- Provides a user-friendly interface to explore and test API endpoints.
+- Displays detailed information about request methods, parameters, and responses.
+- Helps developers and testers understand the API structure.
+
+### Accessing Swagger Documentation:
+1. Start the backend server:
+   ```bash
+   npm start
+```
+
+
+2. Open your browser and navigate to:
+```bash
+http://localhost:5000/api/docs
+```
+
+3. Explore the API endpoints:
+
+- **Authentication**: Endpoints for user signup and login.
+- **Team Management**: Endpoints for creating teams, inviting users, and listing team members.
+- **Project Management**: Endpoints for creating projects and managing tasks.
+
+**Example**:  
+The Swagger UI will display endpoints like:
+- `POST /api/auth/signup`: Register a new user.
+- `POST /api/team/create`: Create a new team.
+- `POST /api/project/task`: Add a task to a project.
