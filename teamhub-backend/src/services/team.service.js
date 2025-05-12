@@ -17,9 +17,23 @@ const createTeam = async (userId, teamName) => {
 
 // Invite a user to a team (mock)
 const inviteUserToTeam = async (teamId, email) => {
-  // Mock: Check if the user exists
+  // Check if the user exists
   const user = await prisma.user.findUnique({ where: { email } });
   if (!user) throw new Error('User not found');
+
+  // Check if the user is already a member of the team
+  const existingMembership = await prisma.teamUser.findUnique({
+    where: {
+      userId_teamId: {
+        userId: user.id,
+        teamId: teamId,
+      },
+    },
+  });
+
+  if (existingMembership) {
+    throw new Error(`User with email ${email} is already a member of the team.`);
+  }
 
   // Add the user to the team
   await prisma.teamUser.create({
@@ -46,4 +60,22 @@ const listTeamMembers = async (teamId) => {
   return members.map((member) => member.user);
 };
 
-module.exports = { createTeam, inviteUserToTeam, listTeamMembers };
+// Fetch all teams for the authenticated user
+const listTeams = async (userId) => {
+  const teams = await prisma.team.findMany({
+    where: {
+      members: {
+        some: {
+          userId,
+        },
+      },
+    },
+    select: {
+      id: true,
+      name: true,
+    },
+  });
+  return teams;
+};
+
+module.exports = { createTeam, inviteUserToTeam, listTeamMembers, listTeams };

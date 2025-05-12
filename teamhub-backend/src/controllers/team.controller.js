@@ -31,4 +31,14 @@ const listTeamMembers = async (req, res) => {
   }
 };
 
-module.exports = { createTeam, inviteUserToTeam, listTeamMembers };
+const listTeams = async (req, res) => {
+  try {
+    const userId = req.user.userId; // Extract userId from the authenticated user
+    const teams = await teamService.listTeams(userId);
+    res.status(200).json({ success: true, teams });
+  } catch (err) {
+    res.status(400).json({ success: false, message: err.message });
+  }
+};
+
+module.exports = { createTeam, inviteUserToTeam, listTeamMembers, listTeams };

@@ -130,6 +130,36 @@ router.use(authMiddleware);
  *         description: Bad request
  */
 
+/**
+ * @swagger
+ * /team/list:
+ *   get:
+ *     summary: List all teams for the authenticated user
+ *     tags: [Team Management]
+ *     responses:
+ *       200:
+ *         description: List of teams
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 teams:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: string
+ *                         example: team-id
+ *                       name:
+ *                         type: string
+ *                         example: Team Alpha
+ */
+
 // Create a new team
 router.post('/create', teamController.createTeam);
 
@@ -138,5 +168,8 @@ router.post('/invite', teamController.inviteUserToTeam);
 
 // List all members of a team
 router.get('/:teamId/members', teamController.listTeamMembers);
+
+// List all teams for the authenticated user
+router.get('/list', teamController.listTeams);
 
 module.exports = router;

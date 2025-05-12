@@ -37,4 +37,13 @@ export const teamService = {
     });
     return response.data;
   },
+
+  listTeams: async (token: string) => {
+    const response = await axios.get(`${API_URL}/list`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  },
 };
