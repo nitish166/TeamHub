@@ -1,0 +1,61 @@
+name: Backend CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: root
+          POSTGRES_DB: teamhub
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Set up Prisma
+      - name: Set up Prisma
+        run: npx prisma generate
+
+      # Step 5: Run migrations
+      - name: Run migrations
+        env:
+          DATABASE_URL: "postgresql://postgres:root@localhost:5432/teamhub"
+        run: npx prisma migrate dev --name init
+
+      # Step 6: Run tests (if you have tests)
+      - name: Run tests
+        run: npm test
+
+      # Step 7: Lint the code
+      - name: Lint code
+        run: npx eslint .
