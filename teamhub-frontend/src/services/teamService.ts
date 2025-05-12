@@ -1,6 +1,9 @@
 import axios from 'axios';
+import { API_BASE_URL } from './apiConfig';
 
-const API_URL = 'http://localhost:5000/api/team';
+
+
+const API_URL = `${API_BASE_URL}/team`;
 
 export const teamService = {
   createTeam: async (teamName: string, token: string) => {
