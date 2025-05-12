@@ -178,6 +178,97 @@ router.use(authMiddleware);
  *         description: Bad request
  */
 
+/**
+ * @swagger
+ * /project/list/{teamId}:
+ *   get:
+ *     summary: List all projects for a team
+ *     tags: [Project Management]
+ *     parameters:
+ *       - in: path
+ *         name: teamId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the team
+ *     responses:
+ *       200:
+ *         description: List of projects retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 projects:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: string
+ *                         example: project-id
+ *                       name:
+ *                         type: string
+ *                         example: Project Alpha
+ *       400:
+ *         description: Bad request
+ */
+
+/**
+ * @swagger
+ * /project/tasks/{projectId}:
+ *   get:
+ *     summary: List all tasks for a project
+ *     tags: [Project Management]
+ *     parameters:
+ *       - in: path
+ *         name: projectId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the project
+ *     responses:
+ *       200:
+ *         description: List of tasks retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 tasks:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: string
+ *                         example: task-id
+ *                       title:
+ *                         type: string
+ *                         example: Task 1
+ *                       description:
+ *                         type: string
+ *                         example: This is the first task
+ *                       status:
+ *                         type: string
+ *                         example: To Do
+ *                       assignedToId:
+ *                         type: string
+ *                         example: user-id
+ *                       dueDate:
+ *                         type: string
+ *                         format: date-time
+ *                         example: 2025-12-31T23:59:59.000Z
+ *       400:
+ *         description: Bad request
+ */
+
 // Create a new project within a team
 router.post('/create', projectController.createProject);
 
@@ -186,5 +277,14 @@ router.post('/task', projectController.addTaskToProject);
 
 // Update a task
 router.put('/task/:taskId', projectController.updateTask);
+
+// List all projects for a team
+router.get('/list/:teamId', projectController.listProjects);
+
+// List all tasks for a project
+router.get('/tasks/:projectId', projectController.listTasks);
+
+// Get project details
+router.get('/:projectId', projectController.getProjectDetails);
 
 module.exports = router;

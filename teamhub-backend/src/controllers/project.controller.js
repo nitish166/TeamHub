@@ -37,4 +37,34 @@ const updateTask = async (req, res) => {
   }
 };
 
-module.exports = { createProject, addTaskToProject, updateTask };
+const listProjects = async (req, res) => {
+  try {
+    const { teamId } = req.params;
+    const projects = await projectService.listProjects(teamId);
+    res.status(200).json({ success: true, projects });
+  } catch (err) {
+    res.status(400).json({ success: false, message: err.message });
+  }
+};
+
+const listTasks = async (req, res) => {
+  try {
+    const { projectId } = req.params;
+    const tasks = await projectService.listTasks(projectId);
+    res.status(200).json({ success: true, tasks });
+  } catch (err) {
+    res.status(400).json({ success: false, message: err.message });
+  }
+};
+
+const getProjectDetails = async (req, res) => {
+  try {
+    const { projectId } = req.params;
+    const project = await projectService.getProjectDetails(projectId);
+    res.status(200).json({ success: true, project });
+  } catch (err) {
+    res.status(400).json({ success: false, message: err.message });
+  }
+};
+
+module.exports = { createProject, addTaskToProject, updateTask, listProjects, listTasks, getProjectDetails };

@@ -37,4 +37,32 @@ export const projectService = {
     });
     return response.data;
   },
+
+  listProjects: async (teamId: string, token: string) => {
+    const response = await axios.get(`${API_URL}/list/${teamId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  },
+
+  // Add the missing getTasks function
+  getTasks: async (projectId: string, token: string) => {
+    const response = await axios.get(`${API_URL}/tasks/${projectId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  },
+
+  getProjectDetails: async (projectId: string, token: string) => {
+    const response = await axios.get(`${API_URL}/${projectId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data.project; // Assuming the API returns { success: true, project: { ... } }
+  },
 };
