@@ -485,3 +485,41 @@ The Swagger UI will display endpoints like:
 - `POST /api/auth/signup`: Register a new user.
 - `POST /api/team/create`: Create a new team.
 - `POST /api/project/task`: Add a task to a project.
+
+
+
+---
+
+## Docker Support
+
+TeamHub can be easily run using Docker, which simplifies setup and deployment by packaging the backend, frontend, and database into isolated containers.
+
+### Prerequisites
+
+- [Docker](https://www.docker.com/get-started) and [Docker Compose](https://docs.docker.com/compose/) installed on your system.
+
+### Quick Start
+
+1. **Clone the repository** and navigate to the project root.
+
+2. **Build and start all services** (backend, frontend, and database) with one command:
+   ```bash
+   docker-compose up --build
+  ```
+3. Access the application:
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:5000
+- Swagger Docs: http://localhost:5000/api/docs  
+
+### How It Works
+
+- **Backend**: Runs in a Node.js container, connects to the database, and exposes REST APIs.
+- **Frontend**: Built with React and served via Nginx in a separate container.
+- **Database**: Uses a PostgreSQL container for persistent data storage.
+
+### Environment Variables
+
+You can configure environment variables for each service in the `docker-compose.yml` file or by using `.env` files as needed.
+
+
+
