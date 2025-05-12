@@ -448,17 +448,3 @@ model Task {
   project      Project  @relation(fields: [projectId], references: [id])
   dueDate      DateTime
 }
-
-```
-
-
-
-
-
-
-
-
-
-
-
-
