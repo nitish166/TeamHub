@@ -1,18 +1,19 @@
-# Use Node LTS base image
 FROM node:18
 
-# Set working directory
 WORKDIR /app
 
-# Copy package.json and install dependencies
 COPY package*.json ./
 RUN npm install
 
-# Copy the rest of the code
 COPY . .
 
-# Expose port
+# Generate Prisma client
+RUN npx prisma generate
+
+# Copy and make wait script executable
+COPY wait-for-db.sh .
+RUN chmod +x wait-for-db.sh
+
 EXPOSE 5000
 
-# Start the app
-CMD ["node", "index.js"]
+CMD ["./wait-for-db.sh"]
