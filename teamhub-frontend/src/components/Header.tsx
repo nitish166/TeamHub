@@ -17,11 +17,13 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="bg-blue-500 text-white py-4 shadow-md">
-      <div className="container mx-auto px-4 flex justify-between items-center">
+    <header className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md">
+      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo */}
-        <h1 className="text-2xl font-bold">
-          <Link to="/">TeamHub</Link>
+        <h1 className="text-3xl font-bold tracking-wide">
+          <Link to="/" className="hover:text-yellow-300 transition duration-300">
+            TeamHub
+          </Link>
         </h1>
 
         {/* Navigation Links */}
@@ -29,7 +31,7 @@ const Header: React.FC = () => {
           {isAuthenticated ? (
             <button
               onClick={handleLogout}
-              className="bg-red-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-red-600"
+              className="bg-red-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-red-600 transition duration-300"
             >
               Logout
             </button>
@@ -37,13 +39,13 @@ const Header: React.FC = () => {
             <>
               <Link
                 to="/login"
-                className="bg-white text-blue-500 px-4 py-2 rounded-md shadow-md hover:bg-gray-100"
+                className="bg-white text-blue-500 px-4 py-2 rounded-md shadow-md hover:bg-gray-100 transition duration-300"
               >
                 Login
               </Link>
               <Link
                 to="/signup"
-                className="bg-white text-blue-500 px-4 py-2 rounded-md shadow-md hover:bg-gray-100"
+                className="bg-white text-blue-500 px-4 py-2 rounded-md shadow-md hover:bg-gray-100 transition duration-300"
               >
                 Signup
               </Link>

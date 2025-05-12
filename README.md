@@ -469,6 +469,7 @@ TeamHub's backend includes **Swagger API documentation** to provide a detailed o
 
 
 2. Open your browser and navigate to:
+
 ```bash
 http://localhost:5000/api/docs
 ```

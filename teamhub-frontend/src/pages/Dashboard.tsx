@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Dashboard: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<'team' | 'project'>('team'); // Manage active tab state
+
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Main Content */}
@@ -9,46 +11,66 @@ const Dashboard: React.FC = () => {
         <section className="text-center">
           <h2 className="text-3xl font-bold text-gray-800 mb-4">Welcome to Your Dashboard</h2>
           <p className="text-gray-600 mb-8">
-            Here you can manage your teams, projects, and tasks.
+            Manage your teams, projects, and tasks efficiently.
           </p>
         </section>
 
-        {/* Quick Links for Team Management */}
-        <section className="mt-12">
-          <h3 className="text-2xl font-bold text-gray-800 mb-4">Team Management</h3>
-          <ul className="space-y-4">
-            <li className="bg-white p-4 rounded-md shadow-md">
-              <h4 className="text-xl font-semibold text-gray-800">Create a Team</h4>
-              <p className="text-gray-600">Start by creating a new team for your projects.</p>
+        {/* Tabs for Team Management and Project Management */}
+        <div className="flex justify-center space-x-4 mb-8">
+          <button
+            onClick={() => setActiveTab('team')}
+            className={`px-6 py-2 rounded-md shadow-md ${
+              activeTab === 'team' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'
+            }`}
+          >
+            Team Management
+          </button>
+          <button
+            onClick={() => setActiveTab('project')}
+            className={`px-6 py-2 rounded-md shadow-md ${
+              activeTab === 'project' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'
+            }`}
+          >
+            Project Management
+          </button>
+        </div>
+
+        {/* Dynamic Content Based on Active Tab */}
+        {activeTab === 'team' && (
+          <section>
+            <h3 className="text-2xl font-bold text-gray-800 mb-4">Team Management</h3>
+            <div className="bg-white p-6 rounded-md shadow-md">
+              <h4 className="text-xl font-semibold text-gray-800 mb-4">Manage Your Teams</h4>
+              <p className="text-gray-600 mb-4">
+                Create and manage your teams, invite members, and collaborate effectively.
+              </p>
               <Link
                 to="/team-management"
-                className="mt-2 inline-block bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600"
+                className="inline-block bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600"
               >
-                Manage Teams
+                Go to Team Management
               </Link>
-            </li>
-            <li className="bg-white p-4 rounded-md shadow-md">
-              <h4 className="text-xl font-semibold text-gray-800">Invite Users</h4>
-              <p className="text-gray-600">Invite team members to collaborate on your projects.</p>
+            </div>
+          </section>
+        )}
+
+        {activeTab === 'project' && (
+          <section>
+            <h3 className="text-2xl font-bold text-gray-800 mb-4">Project Management</h3>
+            <div className="bg-white p-6 rounded-md shadow-md">
+              <h4 className="text-xl font-semibold text-gray-800 mb-4">Manage Your Projects</h4>
+              <p className="text-gray-600 mb-4">
+                Create projects, add tasks, and track progress with your team.
+              </p>
               <Link
-                to="/team-management"
-                className="mt-2 inline-block bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600"
+                to="/project-management"
+                className="inline-block bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600"
               >
-                Invite Users
+                Go to Project Management
               </Link>
-            </li>
-            <li className="bg-white p-4 rounded-md shadow-md">
-              <h4 className="text-xl font-semibold text-gray-800">View Team Members</h4>
-              <p className="text-gray-600">See all the members of your team in one place.</p>
-              <Link
-                to="/team-management"
-                className="mt-2 inline-block bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600"
-              >
-                View Members
-              </Link>
-            </li>
-          </ul>
-        </section>
+            </div>
+          </section>
+        )}
       </main>
     </div>
   );
